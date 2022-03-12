@@ -41,6 +41,13 @@ dependencies:
   video_player:
   video_thumbnail: ^0.4.3
   path_provider:
+  image_picker:
+  video_editor:
+  sn_progress_dialog: ^1.0.3
+  screenshot: ^1.2.3
+
+
+
 
 
   

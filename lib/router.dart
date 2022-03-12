@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_zoom/pages/multipleImage.dart';
+import 'package:image_zoom/pages/pick_image_page.dart';
+import 'package:image_zoom/pages/video_preview_page.dart';
+import 'package:image_zoom/services/export_to_video.dart';
+import 'package:video_editor/domain/bloc/controller.dart';
 
-import 'pages/homepage.dart';
+import 'pages/singleImage.dart';
 import 'utils/fade_in_route.dart';
 
 typedef RouterMethod = PageRoute Function(RouteSettings, Map<String, String>);
@@ -14,10 +20,18 @@ final Map<String, RouterMethod> _definitions = {
     return MaterialPageRoute(
       settings: settings,
       builder: (context) {
-        return const MultipleImages();
+        return const PickImagePage();
       },
     );
   },
+  // '/multipleImages': (settings, _) {
+  //   return MaterialPageRoute(
+  //     settings: settings,
+  //     builder: (context) {
+  //       return const MultipleImages();
+  //     },
+  //   );
+  // },
 };
 
 Map<String, String>? _buildParams(String key, String name) {
@@ -77,4 +91,32 @@ Route buildRouter(RouteSettings settings) {
 
 void openHomePage(BuildContext context) {
   Navigator.of(context).pushNamed("/");
+}
+
+void openMultipleImage(BuildContext context, List<File> files) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => MultipleImages(files: files),
+    ),
+  );
+}
+
+// void openExportToVideo(BuildContext context) {
+//   Navigator.push(
+//     context,
+//     MaterialPageRoute(
+//       builder: (context) => ExportToVideo(),
+//     ),
+//   );
+// }
+
+void openVideoPreviewPage(
+    BuildContext context, VideoEditorController _controller) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => VideoPreviewPage(controller: _controller),
+    ),
+  );
 }
